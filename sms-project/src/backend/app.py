@@ -99,6 +99,7 @@ def get_students():
 def add_student():
     """Add a new student record."""
     data = request.get_json()
+feature/update-dashboard-title
    
 
 # Validate registration number must start with VIT
@@ -106,6 +107,15 @@ if data.get('reg_no') and not data.get('reg_no', '').startswith('VIT'):
     return jsonify({'success': False, 'message': 'Registration number must start with VIT'}), 400
 
 required = ['reg_no', 'name', 'email', 'course']
+
+    # Validate registration number must start with VIT
+    if data.get('reg_no') and not data.get('reg_no', '').startswith('VIT'):
+        return jsonify({'success': False, 'message': 'Registration number must start with VIT'}), 400
+    # Validate registration number format (must start with VIT)
+    reg_no = data.get('reg_no', '')
+    if reg_no and not reg_no.startswith('VIT'):
+        return jsonify({'success': False, 'message': 'Registration number must start with VIT'}), 400
+ main
     required = ['reg_no', 'name', 'email', 'course']
     for field in required:
         if not data.get(field):
