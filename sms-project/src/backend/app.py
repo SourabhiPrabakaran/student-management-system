@@ -99,6 +99,10 @@ def get_students():
 def add_student():
     """Add a new student record."""
     data = request.get_json()
+    # Validate registration number format (must start with VIT)
+    reg_no = data.get('reg_no', '')
+    if reg_no and not reg_no.startswith('VIT'):
+        return jsonify({'success': False, 'message': 'Registration number must start with VIT'}), 400
     required = ['reg_no', 'name', 'email', 'course']
     for field in required:
         if not data.get(field):
