@@ -179,3 +179,8 @@ class TestUtilities:
 
     def test_different_passwords_different_hashes(self):
         assert hash_password('password1') != hash_password('password2')
+    def test_health_app_name(self, client):
+        """Health response should include app name."""
+        response = client.get('/api/health')
+        data = response.get_json()
+        assert 'app' in data
